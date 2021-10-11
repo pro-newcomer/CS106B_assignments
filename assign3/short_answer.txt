@@ -1,0 +1,82 @@
+Before submitting this file, make sure that there are no more TODO
+placeholders remaining in the file (and remove this comment too).
+
+Warmup
+------
+
+Q1. Looking at a call stack listing in a debugger, what is the indication that the program being debugged uses recursion?
+A1. A program using recursion has identical function called for many times and they are all at the same address.
+
+Q2. Subtract the innermost level number from the outermost to get the maximum count of stack frames that fit in the capacity of the call stack. How many stack frames fit in your system's call stack?
+A2. 16025
+
+Q3. Describe how the symptoms of infinite recursion differ from the symptoms of an infinite loop.
+A3. It crashes the program quickly instead of taking a long time and not returning.
+
+Q4. What is the pattern to which values of base number and exponent result in a test failure?
+A4. They have negative base and odd exp.
+
+Q5. Of the existing five cases, are there any that seem redundant and can be removed from the function? Which do you think are absolutely necessary? Are there any cases that you're unsure about?
+A5. I think the base < 0 case is not necessary and causes problems. Also, the case base == 0 is also not that necessary. But I think the exp == 0 is necessary to stop the recursion.
+
+
+Balanced
+--------
+
+Q6. Compare your recursive solution to the iterative approach used for the Check Balance problem in [Section 1][section1]. Which version do you find easier to read and understand? In which version did you find it easier to confirm the correct behavior?
+A6. Recursion is easier to understand and more elegant. In recursion, the behavior is much easier to confirm since there is less different paths of execution.
+
+Merge
+-----
+
+Q7. Give a rough estimate of the maximum length sequence that could be successfully merged on your system assuming a recursive implementation of `binaryMerge`.
+A7. I estimate it to be queue that has length arround 15000.
+
+Q8. What would be the observed behavior if attempting to recursively merge a sequence larger than that maximum?
+A8. The program will crash or be unresponsive. In machines with less protection, it may also crashes the system.
+
+Q9. Include the data from your execution timing and explain how it supports your Big O prediction for `binaryMerge`.
+A9. I predicted the Big O to be O(N) and the timing verified that:
+N       T
+4M      1.207
+8M      2.488
+16M     4.865
+
+Q10. Include the data from your execution timing and explain how it supports your Big O prediction for `naiveMultiMerge`.
+A10. Prediction O(n k)
+For `k`:
+Correct (STUDENT_TEST, line 173) Time operation of `naiveMultiPage` Big O with fixed n
+    Line 180 TIME_OPERATION naiveMultiMerge(input) (size =        4) completed in    0.132 secs
+    Line 180 TIME_OPERATION naiveMultiMerge(input) (size =        5) completed in    0.166 secs
+    Line 180 TIME_OPERATION naiveMultiMerge(input) (size =        6) completed in    0.196 secs
+
+it is proportional to `k`
+
+For `n`:
+
+Correct (STUDENT_TEST, line 184) Time operation of `naiveMultiPage` Big O with fixed k
+    Line 191 TIME_OPERATION naiveMultiMerge(input) (size =   100000) completed in    0.081 secs
+    Line 191 TIME_OPERATION naiveMultiMerge(input) (size =   200000) completed in    0.162 secs
+    Line 191 TIME_OPERATION naiveMultiMerge(input) (size =   300000) completed in    0.253 secs
+
+it is proportional to `n`
+
+Q11. Include the data from your execution timing and explain how it supports the `O(n log k)` runtime for `recMultiMerge`.
+A11. The data is shown below:
+
+Correct (STUDENT_TEST, line 181) Time operation of `naiveMultiPage` Big O with fixed n
+    Line 188 TIME_OPERATION naiveMultiMerge(input) (size =        4) completed in    0.136 secs
+    Line 188 TIME_OPERATION naiveMultiMerge(input) (size =        5) completed in    0.165 secs
+    Line 188 TIME_OPERATION naiveMultiMerge(input) (size =        6) completed in    0.199 secs
+
+Correct (STUDENT_TEST, line 192) Time operation of `naiveMultiPage` Big O with fixed k
+    Line 199 TIME_OPERATION naiveMultiMerge(input) (size =   100000) completed in    0.080 secs
+    Line 199 TIME_OPERATION naiveMultiMerge(input) (size =   200000) completed in    0.164 secs
+    Line 199 TIME_OPERATION naiveMultiMerge(input) (size =   300000) completed in    0.251 secs
+
+The time is linear when k is increasing exponentially, which means it is proportional to log K.
+And the time with n is linear, which means it is proportional to N.
+Therefore, O(n log k) it is.
+
+Q12. You run `recMultiMerge` on a sequence of size 1 million and see that it completes just fine. Explain why this is not running afoul of the call stack capacity limitation.  _Hint_: How many stack frames (levels) are expected to be on the call stack at the deepest point in the recursion in `recMultiMerge`?
+A12. Actually is it not that related to N, but related to K. the recursion is just about K. And it increasely extreamly slow because the depth should be proportional to log K.
